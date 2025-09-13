@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cpen321.usermanagement.R
 import com.cpen321.usermanagement.ui.screens.AuthScreen
+import com.cpen321.usermanagement.ui.screens.EventDisplayScreen
 import com.cpen321.usermanagement.ui.screens.LoadingScreen
 import com.cpen321.usermanagement.ui.screens.MainScreen
 import com.cpen321.usermanagement.ui.screens.ManageHobbiesScreen
@@ -33,6 +34,7 @@ object NavRoutes {
     const val MANAGE_PROFILE = "manage_profile"
     const val MANAGE_HOBBIES = "manage_hobbies"
     const val PROFILE_COMPLETION = "profile_completion"
+    const val EVENTS = "events"
 }
 
 @Composable
@@ -123,6 +125,11 @@ private fun handleNavigationEvent(
             navigationStateManager.clearNavigationEvent()
         }
 
+        is NavigationEvent.NavigateToEvents -> {
+            navController.navigate(NavRoutes.EVENTS)
+            navigationStateManager.clearNavigationEvent()
+        }
+
         is NavigationEvent.NavigateToManageHobbies -> {
             navController.navigate(NavRoutes.MANAGE_HOBBIES)
             navigationStateManager.clearNavigationEvent()
@@ -178,7 +185,8 @@ private fun AppNavHost(
         composable(NavRoutes.MAIN) {
             MainScreen(
                 mainViewModel = mainViewModel,
-                onProfileClick = { navigationStateManager.navigateToProfile() }
+                onProfileClick = { navigationStateManager.navigateToProfile() },
+                onFindEventsClick = { navigationStateManager.navigateToEvents() }
             )
         }
 
@@ -206,6 +214,12 @@ private fun AppNavHost(
             ManageHobbiesScreen(
                 profileViewModel = profileViewModel,
                 onBackClick = { navigationStateManager.navigateBack() }
+            )
+        }
+
+        composable(NavRoutes.EVENTS){
+            EventDisplayScreen(
+                mainViewModel = mainViewModel
             )
         }
     }

@@ -8,11 +8,11 @@
 
 **How it was fixed?**: [WRITE_ISSUE_SOLUTION]
 
-### Issue 2: [WRITE_ISSUE_TITLE]
+### Issue 2: [No Way To Deploy / UnDockerized]
 
-**Description**:[WRITE_ISSUE_DESCRIPTION]
+**Description**: The program needed a docker system so we could deploy it!
 
-**How it was fixed?**: [WRITE_ISSUE_SOLUTION]
+**How it was fixed?**: I set it up with GitHub actions to create an automated deployment plateform to my AWS public server  
 
 ### Issue 3: [WRITE_ISSUE_TITLE]
 

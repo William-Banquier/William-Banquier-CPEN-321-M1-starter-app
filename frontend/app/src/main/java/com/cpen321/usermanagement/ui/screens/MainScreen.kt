@@ -1,11 +1,16 @@
 package com.cpen321.usermanagement.ui.screens
 
+import Button
 import Icon
+import android.graphics.Paint
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.cpen321.usermanagement.R
 import com.cpen321.usermanagement.ui.components.MessageSnackbar
 import com.cpen321.usermanagement.ui.components.MessageSnackbarState
@@ -33,7 +40,8 @@ import com.cpen321.usermanagement.ui.theme.LocalSpacing
 @Composable
 fun MainScreen(
     mainViewModel: MainViewModel,
-    onProfileClick: () -> Unit
+    onProfileClick: () -> Unit,
+    onFindEventsClick: () -> Unit
 ) {
     val uiState by mainViewModel.uiState.collectAsState()
     val snackBarHostState = remember { SnackbarHostState() }
@@ -42,7 +50,8 @@ fun MainScreen(
         uiState = uiState,
         snackBarHostState = snackBarHostState,
         onProfileClick = onProfileClick,
-        onSuccessMessageShown = mainViewModel::clearSuccessMessage
+        onSuccessMessageShown = mainViewModel::clearSuccessMessage,
+        onFindEventsClick = onFindEventsClick,
     )
 }
 
@@ -52,6 +61,7 @@ private fun MainContent(
     snackBarHostState: SnackbarHostState,
     onProfileClick: () -> Unit,
     onSuccessMessageShown: () -> Unit,
+    onFindEventsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -67,7 +77,7 @@ private fun MainContent(
             )
         }
     ) { paddingValues ->
-        MainBody(paddingValues = paddingValues)
+        MainBody(paddingValues = paddingValues, onFindEventsClick = onFindEventsClick)
     }
 }
 
@@ -148,15 +158,28 @@ private fun MainSnackbarHost(
 @Composable
 private fun MainBody(
     paddingValues: PaddingValues,
+    onFindEventsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(
+   Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(paddingValues),
-        contentAlignment = Alignment.Center
+            .padding(paddingValues)
     ) {
-        WelcomeMessage()
+        Column(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            WelcomeMessage()
+            WelcomeSubMessage()
+        }
+
+        FindEventsButton(
+            onClick = onFindEventsClick,
+            modifier = Modifier.align(Alignment.Center)
+        )
     }
 }
 
@@ -169,8 +192,42 @@ private fun WelcomeMessage(
     Text(
         text = stringResource(R.string.welcome),
         style = MaterialTheme.typography.bodyLarge,
-        fontSize = fontSizes.extraLarge3,
+        fontSize = fontSizes.extraLarge2,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
+        textAlign = TextAlign.Center,
         modifier = modifier
     )
+}
+
+@Composable
+private fun WelcomeSubMessage(
+    modifier: Modifier = Modifier
+){
+    val fontSizes = LocalFontSizes.current;
+
+    Text(
+        text = stringResource(R.string.welcome_subtext),
+        style = MaterialTheme.typography.bodyLarge,
+        fontSize = fontSizes.medium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        textAlign = TextAlign.Center,
+        modifier = modifier.padding(top = 16.dp)
+    )
+}
+
+@Composable
+private fun FindEventsButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp) // Give the button some horizontal padding
+    ) {
+        Text(
+            text=stringResource(R.string.event_load_btn)
+        )
+    }
 }

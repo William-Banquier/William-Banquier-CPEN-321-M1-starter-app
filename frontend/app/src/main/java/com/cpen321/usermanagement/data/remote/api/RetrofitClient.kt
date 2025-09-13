@@ -39,6 +39,8 @@ object RetrofitClient {
     val userInterface: UserInterface = retrofit.create(UserInterface::class.java)
     val hobbyInterface: HobbyInterface = retrofit.create(HobbyInterface::class.java)
 
+    val eventInterface: EventsInterface = retrofit.create(EventsInterface::class.java)
+
     fun setAuthToken(token: String?) {
         authToken = token
     }
