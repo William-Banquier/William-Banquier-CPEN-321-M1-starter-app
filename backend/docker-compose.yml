@@ -24,7 +24,9 @@ services:
       - "${PORT}:${PORT}"
     depends_on:
       - mongo
-    command: npm start
+    command: |
+      cd backend
+      npm start
 
 
 volumes:
