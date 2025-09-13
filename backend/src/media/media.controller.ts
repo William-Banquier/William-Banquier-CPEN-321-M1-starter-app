@@ -2,12 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 
 import logger from '../logger.util';
 import { MediaService } from '../media/media.service';
-import { UploadImageRequest, UploadImageResponse } from './media.types';
+import { UploadImageResponse } from './media.types';
 import { sanitizeInput } from '../sanitizeInput.util';
 
 export class MediaController {
   async uploadImage(
-    req: Request<unknown, unknown, UploadImageRequest>,
+    req: Request,
     res: Response<UploadImageResponse>,
     next: NextFunction
   ) {

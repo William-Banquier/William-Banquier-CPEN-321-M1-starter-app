@@ -10,8 +10,8 @@ const mediaController = new MediaController();
 router.post(
   '/upload',
   authenticateToken,
-  upload.single('media'),
-  mediaController.uploadImage
+  upload.single('file'),
+  (req, res, next) => mediaController.uploadImage(req, res, next) // <-- ensure correct context
 );
 
 export default router;

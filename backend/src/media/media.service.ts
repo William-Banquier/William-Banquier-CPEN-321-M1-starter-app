@@ -3,12 +3,21 @@ import path from 'path';
 
 import { IMAGES_DIR } from '../hobbies/hobbies';
 
+// Helper to ensure file operations stay inside IMAGES_DIR
+function safeJoin(base: string, target: string): string {
+  const targetPath = path.resolve(base, target);
+  if (!targetPath.startsWith(path.resolve(base))) {
+    throw new Error('Invalid file path');
+  }
+  return targetPath;
+}
+
 export class MediaService {
   static async saveImage(filePath: string, userId: string): Promise<string> {
     try {
       const fileExtension = path.extname(filePath);
       const fileName = `${userId}-${Date.now()}${fileExtension}`;
-      const newPath = path.join(IMAGES_DIR, fileName);
+      const newPath = safeJoin(IMAGES_DIR, fileName);
 
       fs.renameSync(filePath, newPath);
 
@@ -21,13 +30,11 @@ export class MediaService {
     }
   }
 
-  static async deleteImage(url: string): Promise<void> {
+  static async deleteImage(fileName: string): Promise<void> {
     try {
-      if (url.startsWith(IMAGES_DIR)) {
-        const filePath = path.join(process.cwd(), url.substring(1));
-        if (fs.existsSync(filePath)) {
-          fs.unlinkSync(filePath);
-        }
+      const filePath = safeJoin(IMAGES_DIR, fileName);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
       }
     } catch (error) {
       console.error('Failed to delete old profile picture:', error);
