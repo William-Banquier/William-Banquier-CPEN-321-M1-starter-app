@@ -2,8 +2,8 @@
 
 ## New Feature
 
-**Name:** [WRITE_FEATURE_NAME]
+**Name:** [Event Panel]
 
-**Short description:** [WRITE_A_SHORT_DESCRIPTION_OF_THE_CODE]
+**Short description:** [Given some hobbies, finds some events nearby, this code is not fully functional.]
 
-**Location and code:** [WRITE_FEATURE_CODE_LOCATION]
+**Location and code:** [backend/events, frontend where events are mentioned, I created a new screen and with the api requests it is a bit spreadout.]

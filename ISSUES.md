@@ -2,11 +2,11 @@
 
 ## List of issues
 
-### Issue 1: [WRITE_ISSUE_TITLE]
+### Issue 1: [Images Don't Update]
 
-**Description**:[WRITE_ISSUE_DESCRIPTION]
+**Description**:[On a Image / Media Upload Nothing Would Happen]
 
-**How it was fixed?**: [WRITE_ISSUE_SOLUTION]
+**How it was fixed?**: [I updated the route code to help fix it]
 
 ### Issue 2: [No Way To Deploy / UnDockerized]
 
