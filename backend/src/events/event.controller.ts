@@ -1,8 +1,8 @@
 
 import { NextFunction, Request, Response } from 'express';
 
+import logger from '../logger.util';
 import { EVENTS } from './events';
-import logger from './logger.util';
 import { GetEventResponse } from './events.types';
 
 export class EventController {

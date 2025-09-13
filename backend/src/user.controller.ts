@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { GetProfileResponse, UpdateProfileRequest } from './user.types';
 import logger from './logger.util';
-import { MediaService } from './media.service';
+import { MediaService } from './media/media.service';
 import { userModel } from './user.model';
 
 export class UserController {

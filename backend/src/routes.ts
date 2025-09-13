@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import { authenticateToken } from './auth.middleware';
-import authRoutes from './auth.routes';
-import hobbiesRoutes from './hobbies.routes';
-import mediaRoutes from './media.routes';
+import { authenticateToken } from './auth/auth.middleware';
+import authRoutes from './auth/auth.routes';
+import hobbiesRoutes from './hobbies/hobbies.routes';
+import mediaRoutes from './media/media.routes';
 import usersRoutes from './user.routes';
-import eventRoutes from './event.routes';
+import eventRoutes from './events/event.routes';
 
 const router = Router();
 

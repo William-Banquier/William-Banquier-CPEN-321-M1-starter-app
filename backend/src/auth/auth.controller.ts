@@ -1,11 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-
+import { AuthenticateUserRequest, AuthenticateUserResponse } from './auth.types';
 import { authService } from './auth.service';
-import {
-  AuthenticateUserRequest,
-  AuthenticateUserResponse,
-} from './auth.types';
-import logger from './logger.util';
+import logger from '../logger.util';
+
 
 export class AuthController {
   async signUp(
